@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- https://ru.wikibooks.org/wiki/Spring_Security/Конфигурирование_с_помощью_пространства_имён -->
+    <http auto-config="true">
+        <intercept-url pattern="/delete/all" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/demonstration" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
+        <intercept-url pattern="/add/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/edit/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/remove/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
+        <intercept-url pattern="/authorized/user" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/authorized/admin" access="hasAnyRole('ROLE_ADMIN')"/>
+
+        <form-login login-page="/login" default-target-url="/authorized/user" authentication-failure-url="/login?error"
+                    username-parameter="username" password-parameter="password"/>
+
+        <logout logout-success-url="/logout"/>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl"
+                class="com.vakhnenko.departments.service.UserDetailsServiceImpl">
+    </beans:bean>
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+</beans:beans>
