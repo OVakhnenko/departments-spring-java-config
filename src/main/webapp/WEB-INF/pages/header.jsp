@@ -9,7 +9,7 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-body">
-        <a href="https://github.com/ovakhnenko/departments-spring" target="_blank" class="text-left">
+        <a href="https://github.com/OVakhnenko/departments-spring-java-config" target="_blank" class="text-left">
             <img src="/resources/github.png" width="35">
         </a>
         <sec:authorize var="loggedIn" access="isAuthenticated()"/>
