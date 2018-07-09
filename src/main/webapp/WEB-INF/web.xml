@@ -46,6 +46,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -57,8 +58,9 @@
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    </listener>-->
 
+    <!--
     <error-page>
         <error-code>404</error-code>
         <location>/resources/40x/404.jsp</location>
@@ -66,7 +68,7 @@
     <error-page>
         <error-code>403</error-code>
         <location>/resources/40x/403.jsp</location>
-    </error-page>
+    </error-page>-->
 
     <jsp-config>
         <jsp-property-group>

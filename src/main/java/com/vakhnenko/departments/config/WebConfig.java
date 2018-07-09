@@ -3,6 +3,8 @@ package com.vakhnenko.departments.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -25,6 +27,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
         registry.addResourceHandler("/WEB-INF/fonts/**").addResourceLocations("/fonts/");
         registry.addResourceHandler("/WEB-INF/css/**").addResourceLocations("/css/");
+
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
     @Bean
@@ -36,5 +40,17 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
         return resolver;
     }
+
+    // Properties
+    @Bean
+    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+        propertySourcesPlaceholderConfigurer.setLocations(new ClassPathResource("application.properties"));
+        propertySourcesPlaceholderConfigurer.setLocations(new ClassPathResource("database.properties"));
+        propertySourcesPlaceholderConfigurer.setLocations(new ClassPathResource("messages.properties"));
+        return propertySourcesPlaceholderConfigurer;
+    }
+
+    // 40x
 
 }

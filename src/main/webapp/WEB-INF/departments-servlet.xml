@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
-    <!-- Register the messages.properties-->
+    <!-- Register the messages.properties
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="WEB-INF/properties/messages"/>
-    </bean>
+    </bean>-->
 
-    <!-- Application Properties -->
+    <!-- Application Properties
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
             <value>/WEB-INF/properties/application.properties</value>
@@ -23,5 +19,5 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="com.vakhnenko.departments.*"/>
+    <context:component-scan base-package="com.vakhnenko.departments.*"/>-->
 </beans>
