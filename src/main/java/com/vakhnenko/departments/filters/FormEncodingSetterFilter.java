@@ -1,20 +1,21 @@
 package com.vakhnenko.departments.filters;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // http://www.skipy.ru/technics/encodings_webapp.html
-public class FormEncodingSetterFilter implements Filter {
+public class FormEncodingSetterFilter extends BaseFilter {
 
     private static final String FILTERABLE_CONTENT_TYPE = "application/x-www-form-urlencoded";
     private static final String ENCODING_DEFAULT = "UTF-8";
     private static final String ENCODING_INIT_PARAM_NAME = "encoding";
     private String encoding;
 
-    public void destroy() {
-    }
-
-    public void doFilter(ServletRequest req, ServletResponse resp,
+    public void doFilter(HttpServletRequest req, HttpServletResponse resp,
                          FilterChain chain) throws ServletException, IOException {
         String contentType = req.getContentType();
         if (contentType != null && contentType.startsWith(FILTERABLE_CONTENT_TYPE))

@@ -59,8 +59,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/authorized/user").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/authorized/admin").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
+                .antMatchers("/login").permitAll()
+                .antMatchers("/public").permitAll()
+                .antMatchers("/report**").permitAll()
+                .antMatchers("/departments").permitAll()
+
+                .antMatchers("/edit**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/remove**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/delete**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/demonstration").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+
+                .antMatchers("/logout").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/authorized/user**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/authorized/admin**").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
                 .anyRequest().authenticated()
 
                 .and().formLogin().loginPage("/login")
