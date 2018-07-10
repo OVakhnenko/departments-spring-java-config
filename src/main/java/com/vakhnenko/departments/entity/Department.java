@@ -9,12 +9,19 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "department", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
+@Table(name = "department", catalog = "departments")
 public class Department implements com.vakhnenko.departments.entity.Entity, java.io.Serializable {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "department_id", unique = true, nullable = false)
     private int department_id;
+
     @NotEmpty
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
     public Department() {
@@ -30,9 +37,6 @@ public class Department implements com.vakhnenko.departments.entity.Entity, java
         this.employees = employees;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "department_id", unique = true, nullable = false)
     public int getDepartment_id() {
         return department_id;
     }
@@ -41,7 +45,6 @@ public class Department implements com.vakhnenko.departments.entity.Entity, java
         this.department_id = department_id;
     }
 
-    @Column(name = "name", unique = true, nullable = false)
     public String getName() {
         return name;
     }
@@ -50,7 +53,6 @@ public class Department implements com.vakhnenko.departments.entity.Entity, java
         this.name = name;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     public Set<Employee> getEmployees() {
         return employees;
     }

@@ -22,7 +22,7 @@
 
     <!-- Filters -->
     <!-- Encoding! MUST BE FIRST!! -->
-    <!-- http://www.skipy.ru/technics/encodings_webapp.html -->
+    <!-- http://www.skipy.ru/technics/encodings_webapp.html
     <filter>
         <filter-name>FormEncodingSetterFilter</filter-name>
         <filter-class>com.vakhnenko.departments.filters.FormEncodingSetterFilter</filter-class>
@@ -34,9 +34,9 @@
     <filter-mapping>
         <filter-name>FormEncodingSetterFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
-    <!-- Spring Security -->
+    <!-- Spring Security
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -44,7 +44,7 @@
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <!--
     <context-param>
@@ -70,10 +70,11 @@
         <location>/resources/40x/403.jsp</location>
     </error-page>-->
 
+    <!--
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
-    </jsp-config>
+    </jsp-config>-->
 </web-app>

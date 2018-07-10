@@ -14,7 +14,7 @@ public class DepartmentsControllerAdvice {
         model.addAttribute("exception", exception);
         return "500";
     }
-
+/*/
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleException404(Exception exception, Model model) {
@@ -27,5 +27,5 @@ public class DepartmentsControllerAdvice {
     public String handleException403(Exception exception, Model model) {
         model.addAttribute("exception", exception);
         return "403";
-    }
+    }*/
 }

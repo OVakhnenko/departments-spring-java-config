@@ -30,7 +30,7 @@ public class JpaConfig extends WebMvcConfigurerAdapter {
 
     // Declare a JPA Data Source
     @Bean
-    public DataSource dataSourceJPA() {
+    public DataSource jpaDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
@@ -54,9 +54,9 @@ public class JpaConfig extends WebMvcConfigurerAdapter {
     // Declare a JPA Entity Manager Factory
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+            DataSource jpaDataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
-        bean.setDataSource(dataSource);
+        bean.setDataSource(jpaDataSource);
         bean.setJpaVendorAdapter(jpaVendorAdapter);
         bean.setPackagesToScan("com.vakhnenko.departments.entity");
 
@@ -67,7 +67,7 @@ public class JpaConfig extends WebMvcConfigurerAdapter {
     @Bean
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory(dataSourceJPA(), jpaVendorAdapter()).getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory(jpaDataSource(), jpaVendorAdapter()).getObject());
 
         return transactionManager;
     }

@@ -1,5 +1,7 @@
 package com.vakhnenko.departments.config;
 
+import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.entity.Employee;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +45,9 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSourceHibernate());
-        sessionFactory.setPackagesToScan(
-                new String[]{"com.vakhnenko.departments.entity"});
+        sessionFactory.setPackagesToScan(new String[]{"com.vakhnenko.departments.entity"});
         sessionFactory.setHibernateProperties(hibernateProperties());
+        sessionFactory.setAnnotatedClasses(new Class[]{Department.class, Employee.class});
 
         return sessionFactory;
     }
@@ -55,8 +57,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
     public HibernateTransactionManager transactionManagerHibernate(
             SessionFactory sessionFactory) {
 
-        HibernateTransactionManager txManager
-                = new HibernateTransactionManager();
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
