@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @ComponentScan("com.vakhnenko.departments.entity")
 @EnableJpaRepositories("com.vakhnenko.departments.dao")
-@PropertySource("WEB-INF/properties/database.properties")
+@PropertySource("/WEB-INF/properties/database.properties")
 public class JpaConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
@@ -65,7 +65,7 @@ public class JpaConfig extends WebMvcConfigurerAdapter {
 
     // Declare a Transaction Manager
     @Bean
-    public JpaTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManagerJpa() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory(jpaDataSource(), jpaVendorAdapter()).getObject());
 

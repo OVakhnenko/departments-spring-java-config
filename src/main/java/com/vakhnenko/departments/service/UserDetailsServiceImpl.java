@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserDao userDao;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(value = "transactionManagerJpa", readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
 

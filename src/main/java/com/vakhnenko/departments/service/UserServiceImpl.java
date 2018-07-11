@@ -8,6 +8,7 @@ import com.vakhnenko.departments.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    @Transactional(value = "transactionManagerJpa")
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<User> users = new HashSet<>();
@@ -44,21 +46,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(value = "transactionManagerJpa")
     public void delete(long id) {
         User user = userDao.getOne(id);
         userDao.delete(user);
     }
 
     @Override
+    @Transactional(value = "transactionManagerJpa")
     public User getOne(long id) {
         return userDao.findOne(id);
     }
+
     @Override
+    @Transactional(value = "transactionManagerJpa")
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
     @Override
+    @Transactional(value = "transactionManagerJpa")
     // https://devcolibri.com/spring-data-jpa-пишем-dao-и-services-часть-2/
     public List<User> getAll() {
         return userDao.findAll();

@@ -1,8 +1,10 @@
 package com.vakhnenko.departments.config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,12 +22,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -35,21 +31,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    /*
-    @Bean
-    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer =
-                new PropertySourcesPlaceholderConfigurer();
-
-        final List<Resource> resourceList = new ArrayList<>();
-        resourceList.add(new ClassPathResource("application.properties"));
-        resourceList.add(new ClassPathResource("WEB-INF/properties/messages.properties"));
-        resourceList.add(new ClassPathResource("WEB-INF/properties/database.properties"));
-        propertySourcesPlaceholderConfigurer.setLocations(resourceList.toArray(new Resource[]{}));
-        propertySourcesPlaceholderConfigurer.setIgnoreResourceNotFound(true);
-        propertySourcesPlaceholderConfigurer.setIgnoreUnresolvablePlaceholders(true);
-
-        return propertySourcesPlaceholderConfigurer;
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-    */
+
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("/WEB-INF/properties/messages");
+        return messageSource;
+    }
 }

@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -30,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -38,12 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(11);
     }
 
@@ -81,13 +80,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/department/**").permitAll()
 
                 .antMatchers("/edit**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/remove**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/delete**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/remove/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/delete/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
                 .antMatchers("/demonstration").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
 
                 .antMatchers("/logout").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/authorized/user**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/authorized/admin**").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
+                .antMatchers("/authorized/user/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/authorized/admin/**").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
                 .anyRequest().authenticated()
 
                 .and().exceptionHandling().accessDeniedPage("/403");

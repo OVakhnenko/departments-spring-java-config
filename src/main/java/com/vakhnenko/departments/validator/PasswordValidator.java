@@ -11,7 +11,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-@PropertySource("WEB-INF/properties/messages.properties")
+@PropertySource("/WEB-INF/properties/messages.properties")
 public class PasswordValidator implements Validator {
 
     @Autowired

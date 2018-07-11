@@ -1,35 +1,47 @@
 package com.vakhnenko.departments.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ControllerAdvice
+//@ControllerAdvice
 public class DepartmentsControllerAdvice {
+    /*
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentsControllerAdvice.class);
+
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException500(Exception exception, Model model) {
-        model.addAttribute("exception", exception);
-        return "500";
+    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+
+        logger.error("8687650044: HTTP Error!!", e);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("500");
+        return mav;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleException404(Exception exception, Model model) {
+    @ExceptionHandler
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleException400(Exception exception, Model model) {
         model.addAttribute("exception", exception);
-        return "404";
+        return "400";
     }
 
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    //@ResponseStatus(HttpStatus.FORBIDDEN)
+    //@ExceptionHandler(AccessDeniedException.class)
     public String handleException403(Exception exception, Model model) {
         model.addAttribute("exception", exception);
         return "403";
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleException400(Exception exception, Model model) {
+    //@ResponseStatus(HttpStatus.NOT_FOUND)
+    //@ExceptionHandler(NoHandlerFoundException.class)
+    public String handleException404(Exception exception, Model model) {
         model.addAttribute("exception", exception);
-        return "400";
+        return "404";
     }
+
+    //@ExceptionHandler
+    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleException500(Exception exception, Model model) {
+        model.addAttribute("exception", exception);
+        return "500";
+    }*/
 }
