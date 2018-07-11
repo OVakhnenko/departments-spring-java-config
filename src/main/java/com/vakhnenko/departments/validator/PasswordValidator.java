@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @PropertySource("WEB-INF/properties/messages.properties")
-public class UserValidator implements Validator {
+public class PasswordValidator implements Validator {
 
     @Autowired
     private UserService userService;
@@ -25,15 +25,6 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
-        if (user.getUsername().length() < Constants.MIN_LENGTH_USERNAME || user.getUsername().length() > Constants.MAX_LENGTH_USERNAME) {
-            errors.rejectValue("username", "Size.userForm.username");
-        }
-
-        if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
-        }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
         if (user.getPassword().length() < Constants.MIN_LENGTH_PASSWORD || user.getPassword().length() > Constants.MAX_LENGTH_PASSWORD) {

@@ -51,8 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/login/")
-                .antMatchers("/departments/");
+                .antMatchers("/login/");
     }
 
     @Override
@@ -61,8 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/public").permitAll()
-                .antMatchers("/report**").permitAll()
+                .antMatchers("/report/**").permitAll()
                 .antMatchers("/departments").permitAll()
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/department/**").permitAll()
 
                 .antMatchers("/edit**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
                 .antMatchers("/remove**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")

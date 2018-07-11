@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -43,7 +44,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(long id) {
+        User user = userDao.getOne(id);
+        userDao.delete(user);
+    }
+
+    @Override
+    public User getOne(long id) {
+        return userDao.findOne(id);
+    }
+    @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
+    }
+
+    @Override
+    // https://devcolibri.com/spring-data-jpa-пишем-dao-и-services-часть-2/
+    public List<User> getAll() {
+        return userDao.findAll();
     }
 }

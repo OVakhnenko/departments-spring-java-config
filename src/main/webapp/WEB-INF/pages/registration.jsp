@@ -39,9 +39,9 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-    <div class="panel panel-danger">
-        <div class="panel-body">
-            <form:form action="/registration" method="post" modelAttribute="userForm">
+    <form:form action="/registration" method="post" modelAttribute="userForm">
+        <div class="panel panel-primary">
+            <div class="panel-body">
                 <div class="alert alert-info" role="alert">New user account</div>
                 <spring:bind path="username">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -73,9 +73,9 @@
                 <button formaction="/departments" class="btn btn-primary">
                     &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
-            </form:form>
+            </div>
         </div>
-    </div>
+    </form:form>
 </div>
 </body>
 </html>

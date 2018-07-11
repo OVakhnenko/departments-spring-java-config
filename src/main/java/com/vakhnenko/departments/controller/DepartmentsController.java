@@ -7,6 +7,7 @@ import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
 import com.vakhnenko.departments.service.SecurityService;
 import com.vakhnenko.departments.service.UserService;
+import com.vakhnenko.departments.validator.PasswordValidator;
 import com.vakhnenko.departments.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -51,6 +52,9 @@ public class DepartmentsController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private PasswordValidator passwordValidator;
 
     @Autowired
     private UserService userService;
@@ -257,19 +261,109 @@ public class DepartmentsController {
         return departments(model);
     }
 
+    @RequestMapping(value = "/departments_forward")
+    public String departments21(ModelMap model) {
+        return "forward:/departments";
+    }
+
     @RequestMapping(value = "/public")
     public String publicPage(Model model) {
         return "public";
     }
 
-    @RequestMapping(value = "authorized/user")
+    @RequestMapping(value = "/authorized/user", method = RequestMethod.GET)
     public String userPage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+
+        User user = new User();
+        user.setUsername(userName);
+        model.addAttribute("loggedUser", user);
+        if ("user".equals(userName) || "admin".equals(userName)) {
+            model.addAttribute("noChangeMessage", "You can't change the password for admin & user!");
+        }
         return "authorized.user";
+    }
+
+    @RequestMapping(value = "/authorized/user", method = RequestMethod.POST)
+    public String userPage(@ModelAttribute("loggedUser") User loggedUser, BindingResult bindingResult,
+                           HttpServletRequest request, HttpServletResponse response, Model model) {
+        passwordValidator.validate(loggedUser, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "authorized.user";
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
+            String userName = auth.getName();
+            User savedUser = userService.findByUsername(userName);
+
+            loggedUser.setId(savedUser.getId());
+            loggedUser.setUsername(savedUser.getUsername());
+            loggedUser.setRoles(savedUser.getRoles());
+
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+            userService.save(loggedUser);
+            securityService.autoLogin(loggedUser.getUsername(), loggedUser.getConfirmPassword());
+
+            model.addAttribute("loggedUser", loggedUser);
+        }
+        return "authorized.user.password.changed";
     }
 
     @RequestMapping(value = "/authorized/admin")
     public String adminPage(Model model) {
+        List<User> users = userService.getAll();
+        model.addAttribute("users", users);
+        model.addAttribute("user", new User());
+
         return "authorized.admin";
+    }
+
+    @RequestMapping(value = "/authorized/admin/change/user/{userId}", method = RequestMethod.GET)
+    public String changeUser(@PathVariable("userId") long userId, Model model) {
+
+        User user = userService.getOne(userId);
+        user.setPassword("");
+        user.setConfirmPassword("");
+        model.addAttribute("user", user);
+        String userName = user.getUsername();
+
+        if ("user".equals(userName) || "admin".equals(userName)) {
+            model.addAttribute("noChangeMessage", "You can't change the password for admin & user!");
+        }
+        return "authorized.admin.change.user";
+    }
+
+    @RequestMapping(value = "/authorized/admin/change/user", method = RequestMethod.POST)
+    public String changeUser(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        passwordValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "authorized.admin.change.user";
+        }
+        User editedUser = userService.findByUsername(user.getUsername());
+        editedUser.setPassword(user.getConfirmPassword());
+        userService.save(editedUser);
+
+        model.addAttribute("ChangedMessage",
+                "Password for " + user.getUsername() + " changed successfully");
+        return "forward:/authorized/admin";
+    }
+
+    @RequestMapping(value = "/authorized/admin/delete/user/{id}", method = RequestMethod.GET)
+    public String removeUser(@PathVariable("id") long id, Model model) {
+        User user = userService.getOne(id);
+        String userName = user.getUsername();
+
+        if ("admin".equals(userName) || "user".equals(userName)) {
+            model.addAttribute("noDeleteMessage", "You can't delete admin & user!");
+            return "forward:/authorized/admin";
+        } else {
+            userService.delete(id);
+            model.addAttribute("DeletedMessage", "User " + userName + " deleted successfully");
+            return "redirect:/authorized/admin";
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

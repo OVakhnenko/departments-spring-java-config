@@ -46,13 +46,11 @@
     </form:form>
 
     <!-- Table of context -->
-    <form:form action="/authorized/user" method="post" modelAttribute="loggedUser">
+    <form:form action="/authorized/admin/change/user" method="post" modelAttribute="user">
         <div class="panel panel-primary">
-            <div class="panel-heading">Authorized user page for "${loggedUser.username}".</div>
+            <div class="panel-heading">&nbsp;</div>
             <div class="panel-body">
-                <div class="alert alert-success" role="alert">This is the page for the authorized user.
-                    You can change the password:
-                </div>
+                <div class="alert alert-success" role="alert">Change password for "${user.username}"</div>
 
                 <c:choose>
                     <c:when test="${not empty noChangeMessage}">
@@ -61,6 +59,10 @@
                         </div>
                     </c:when>
                     <c:otherwise>
+                        <form:input path="username" id="username" readonly="true"
+                                    disabled="true" hidden="true"></form:input>
+                        <form:hidden path="username"/>
+
                         <spring:bind path="password">
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <form:input type="password" path="password" class="form-control"
@@ -81,7 +83,7 @@
                 <c:if test="${empty noChangeMessage}">
                     <button type="submit" class="btn btn-info">Change password</button>
                 </c:if>
-                <button formaction="/departments" class="btn btn-info">Departments</button>
+                <button formaction="/authorized/admin" class="btn btn-info">Admin page</button>
             </div>
         </div>
     </form:form>

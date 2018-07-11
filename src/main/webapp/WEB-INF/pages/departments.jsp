@@ -71,7 +71,7 @@
                             <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
                                     class="glyphicon glyphicon-edit"></span></a></td>
                             <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
-                                    class="glyphicon glyphicon-remove-sign"></span></a></td>
+                                    class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -90,7 +90,7 @@
         </c:if>
         <div class="panel-body">
             <table>
-                <form:form method="POST" commandName="department" action="/add/department">
+                <form:form method="post" commandName="department" action="/add/department">
                     <c:if test="${department.department_id > 0}">
                         <tr>
                             <td>
@@ -107,7 +107,7 @@
                             <label for="nameInput">Name:</label>
                             <form:input path="name" id="nameInput"></form:input>
                         </td>
-                        <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="name" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>

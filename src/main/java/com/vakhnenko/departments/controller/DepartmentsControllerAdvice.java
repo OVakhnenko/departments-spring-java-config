@@ -14,18 +14,22 @@ public class DepartmentsControllerAdvice {
         model.addAttribute("exception", exception);
         return "500";
     }
-/*/
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleException404(Exception exception, Model model) {
         model.addAttribute("exception", exception);
         return "404";
     }
 
-    @ExceptionHandler
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleException403(Exception exception, Model model) {
         model.addAttribute("exception", exception);
         return "403";
-    }*/
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleException400(Exception exception, Model model) {
+        model.addAttribute("exception", exception);
+        return "400";
+    }
 }

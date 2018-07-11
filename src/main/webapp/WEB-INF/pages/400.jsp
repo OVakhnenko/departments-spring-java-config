@@ -7,13 +7,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Public page</title>
+    <title>400</title>
 
     <style type="text/css">
         label {
@@ -39,23 +38,13 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-
-    <!-- Header -->
-    <form:form method="get" commandName="department" action="/login">
-        <jsp:include page="header.jsp"/>
-    </form:form>
-
-    <!-- Table of context -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">Public page</div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">400</div>
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">This is public information. Does not require authorized access.
-            </div>
-
+            Bad request error
+            <br>
+            <br>
             <form:form method="POST" commandName="department" action="/departments">
-                <button formaction="/report/all" type="submit" class="btn btn-info">All employees</button>
-                <button formaction="/report/age" type="submit" class="btn btn-info">Age of employees</button>
-                <button formaction="/report/top" type="submit" class="btn btn-info">Top of employees</button>
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
             </form:form>
         </div>

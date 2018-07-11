@@ -39,7 +39,7 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-    <div class="panel panel-danger">
+    <div class="panel panel-primary">
         <div class="panel-body">
             <form action="/login" method="post" class="form-signin">
                 <div class="alert alert-info" role="alert">Please sign in (user/user or admin/admin) or
@@ -58,10 +58,10 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
 
-                <button class="btn btn-primary" type="submit" method="post">
+                <button class="btn btn-primary" type="submit">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
-                <button formaction="/departments" class="btn btn-primary">
+                <button formaction="/departments_forward" class="btn btn-primary">
                     &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
             </form>

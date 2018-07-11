@@ -41,7 +41,7 @@
     <h1>Departments</h1>
 
     <!-- Header -->
-    <form:form method="get" commandName="department" action="/login">
+    <form:form method="get" action="/login">
         <jsp:include page="header.jsp"/>
     </form:form>
 
@@ -49,10 +49,53 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Admin page</div>
         <div class="panel-body">
-            <div class="alert alert-success" role="alert">This is the page for the admin only!
-            </div>
 
-            <form:form method="POST" commandName="department" action="/departments">
+            <c:choose>
+                <c:when test="${not empty ChangedMessage}">
+                    <div class="alert alert-success">${ChangedMessage}
+                    </div>
+                </c:when>
+                <c:when test="${not empty noDeleteMessage}">
+                    <div class="alert alert-warning">${noDeleteMessage}
+                    </div>
+                </c:when>
+                <c:when test="${not empty DeletedMessage}">
+                    <div class="alert alert-success">${DeletedMessage}
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="alert alert-success" role="alert">This is the page for the admin only!
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
+            <form:form method="POST" commandName="user" action="/departments">
+                <!-- Table of context -->
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th width="60">Change</th>
+                        <th width="60">Delete</th>
+                    </tr>
+                    </thead>
+                    <c:forEach items="${users}" var="username">
+                        <tr>
+                            <td>${username.id}</td>
+                            <td>${username.username}</td>
+                            <td>${username.password}</td>
+
+                            <td><a href="<c:url value='/authorized/admin/change/user/${username.id}'/>"><span
+                                    class="glyphicon glyphicon-edit"></span></a></td>
+                            <td><a href="<c:url value='/authorized/admin/delete/user/${username.id}'/>"><span
+                                    class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
             </form:form>
         </div>

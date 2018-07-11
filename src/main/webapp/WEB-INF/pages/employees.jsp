@@ -80,7 +80,7 @@
                                         class="glyphicon glyphicon-edit"></span></a></td>
                             <td>
                                 <a href="<c:url value='/remove/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
-                                        class="glyphicon glyphicon-remove-sign"></span></a></td>
+                                        class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -130,14 +130,14 @@
                             <label for="nameInput">Employee name:</label>
                             <form:input path="name" id="nameInput"></form:input>
                         </td>
-                        <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="name" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <tr>
                         <td>
                             <label for="ageInput">Employee age:</label>
                             <form:input path="age" id="ageInput"></form:input>
                         </td>
-                        <td><form:errors path="age" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="age" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <tr>
                         <td>
@@ -147,21 +147,21 @@
                                 <form:options items="${typeEmployee}"/>
                             </form:select>
                         </td>
-                        <td><form:errors path="type" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="type" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <tr>
                         <td>
                             <label for="languageInput">Employee language:</label>
                             <form:input path="language" id="languageInput"></form:input>
                         </td>
-                        <td><form:errors path="language" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="language" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <tr>
                         <td>
                             <label for="methodologyInput">Employee methodology:</label>
                             <form:input path="methodology" id="methodologyInput"></form:input>
                         </td>
-                        <td><form:errors path="methodology" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                        <td><form:errors path="methodology" cssStyle="color: red;" element="div"></form:errors></td>
                     </tr>
                     <td>&nbsp;</td>
                     <tr>

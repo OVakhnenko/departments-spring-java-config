@@ -13,32 +13,16 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "employee", catalog = "departments")
 public class Employee implements com.vakhnenko.departments.entity.Entity, java.io.Serializable {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "employee_id", unique = true, nullable = false)
     private int employee_id;
-
     @Min(18)
     @Max(99)
-    @Column(name = "age", nullable = false, precision = 3, scale = 0)
     private int age;
-
     @NotEmpty
-    @Column(name = "name", unique = true, nullable = false)
     private String name;
-
     @NotEmpty
-    @Column(name = "type", nullable = false)
     private String type;
-
-    @Column(name = "language", nullable = false)
     private String language;
-
-    @Column(name = "methodology", nullable = false)
     private String methodology;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
     private Department department;
 
     public Employee() {
@@ -53,6 +37,9 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.department = department;
     }
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "employee_id", unique = true, nullable = false)
     public int getEmployee_id() {
         return employee_id;
     }
@@ -61,6 +48,7 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.employee_id = employee_id;
     }
 
+    @Column(name = "name", unique = true, nullable = false)
     public String getName() {
         return name;
     }
@@ -69,6 +57,7 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.name = name;
     }
 
+    @Column(name = "age", nullable = false, precision = 3, scale = 0)
     public int getAge() {
         return age;
     }
@@ -77,6 +66,7 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.age = age;
     }
 
+    @Column(name = "type", nullable = false)
     public String getType() {
         return type;
     }
@@ -85,6 +75,8 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.type = type;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
     public Department getDepartment() {
         return department;
     }
@@ -93,6 +85,7 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.department = department;
     }
 
+    @Column(name = "language", nullable = false)
     public String getLanguage() {
         return language;
     }
@@ -101,6 +94,7 @@ public class Employee implements com.vakhnenko.departments.entity.Entity, java.i
         this.language = language;
     }
 
+    @Column(name = "methodology", nullable = false)
     public String getMethodology() {
         return methodology;
     }
