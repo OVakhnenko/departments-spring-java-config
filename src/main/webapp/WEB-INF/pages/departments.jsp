@@ -26,6 +26,7 @@
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <link href="${bootstrap}" rel="stylesheet"/>
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -34,7 +35,7 @@
     <![endif]-->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/resources/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/resources/ico/favicon.ico">
 </head>
 
 <body>

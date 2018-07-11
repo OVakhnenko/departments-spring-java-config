@@ -5,12 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/resources/ico/favicon.ico">
 </head>
 <body>
 <div class="panel panel-default">
     <div class="panel-body">
         <a href="https://github.com/OVakhnenko/departments-spring-java-config" target="_blank" class="text-left">
-            <img src="/resources/github.png" width="35">
+            <img src="/resources/png/github.png" width="35">
         </a>
         <sec:authorize var="loggedIn" access="isAuthenticated()"/>
         <c:if test="${not loggedIn}">

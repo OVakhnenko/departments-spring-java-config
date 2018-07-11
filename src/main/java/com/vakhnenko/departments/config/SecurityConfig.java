@@ -49,19 +49,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/login/");
+        web.ignoring().antMatchers("/login/");
+        web.ignoring().antMatchers(
+                "/**/*.css", "/**/*.png", "/**/*.js", "/fonts/*",
+                "/**/*.ico", "/**/*.eot", "/**/*.svg", "/**/*.ttf", "/**/*.woff*");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+
+        http.formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/authorized/user");
+
+        http.logout()
+                .logoutUrl("/logout")
+                //.deleteCookies("remember-me")
+                .logoutSuccessUrl("/departments")
+                .permitAll()
+                .and()
+                .rememberMe();
+
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/public").permitAll()
                 .antMatchers("/report/**").permitAll()
-                .antMatchers("/departments").permitAll()
+                .antMatchers("/departments**").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/department/**").permitAll()
 
@@ -75,9 +90,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authorized/admin**").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
                 .anyRequest().authenticated()
 
-                .and().formLogin().loginPage("/login")
-
-                .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/403");
     }
 }

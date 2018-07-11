@@ -22,10 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
-        registry.addResourceHandler("/WEB-INF/fonts/**").addResourceLocations("/fonts/");
-        registry.addResourceHandler("/WEB-INF/css/**").addResourceLocations("/css/");
-
+        //registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
@@ -35,7 +32,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/pages/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
-
         return resolver;
     }
 

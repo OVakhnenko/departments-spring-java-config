@@ -32,7 +32,7 @@
     <![endif]-->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/resources/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/resources/ico/favicon.ico">
 </head>
 
 <body>
