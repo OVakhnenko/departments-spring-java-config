@@ -79,14 +79,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/department/**").permitAll()
 
-                .antMatchers("/edit**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/remove/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/delete/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/demonstration").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
+                .antMatchers("/edit**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/remove/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/delete/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/demonstration").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 
-                .antMatchers("/logout").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/authorized/user/**").access("hasRole('ROLE_USER') and hasRole('ROLE_ADMIN')")
-                .antMatchers("/authorized/admin/**").access("hasRole('ROLE_USER') and hasRole('ADMIN')")
+                .antMatchers("/logout").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/authorized/user/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/authorized/admin/**").access("hasRole('ADMIN')")
                 .anyRequest().authenticated()
 
                 .and().exceptionHandling().accessDeniedPage("/403");

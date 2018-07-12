@@ -65,7 +65,7 @@ public class JpaConfig extends WebMvcConfigurerAdapter {
 
     // Declare a Transaction Manager
     @Bean
-    public JpaTransactionManager transactionManagerJpa() {
+    public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory(jpaDataSource(), jpaVendorAdapter()).getObject());
 

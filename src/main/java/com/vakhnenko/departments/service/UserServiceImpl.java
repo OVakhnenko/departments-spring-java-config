@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    @Transactional(value = "transactionManagerJpa")
+    @Transactional(value = "transactionManager")
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<User> users = new HashSet<>();
@@ -46,26 +46,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(value = "transactionManagerJpa")
+    @Transactional(value = "transactionManager")
     public void delete(long id) {
         User user = userDao.getOne(id);
         userDao.delete(user);
     }
 
     @Override
-    @Transactional(value = "transactionManagerJpa")
+    @Transactional(value = "transactionManager")
     public User getOne(long id) {
         return userDao.findOne(id);
     }
 
     @Override
-    @Transactional(value = "transactionManagerJpa")
+    @Transactional(value = "transactionManager")
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
     @Override
-    @Transactional(value = "transactionManagerJpa")
+    @Transactional(value = "transactionManager")
     // https://devcolibri.com/spring-data-jpa-пишем-dao-и-services-часть-2/
     public List<User> getAll() {
         return userDao.findAll();
