@@ -6,6 +6,7 @@ import com.vakhnenko.departments.entity.Constants;
 import com.vakhnenko.departments.entity.Role;
 import com.vakhnenko.departments.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +69,6 @@ public class UserServiceImpl implements UserService {
     @Transactional(value = "transactionManager")
     // https://devcolibri.com/spring-data-jpa-пишем-dao-и-services-часть-2/
     public List<User> getAll() {
-        return userDao.findAll();
+        return userDao.findAll(new Sort(Sort.Direction.ASC, "username"));
     }
 }
