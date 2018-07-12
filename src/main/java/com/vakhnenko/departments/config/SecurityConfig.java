@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+// https://docs.spring.io/spring-security/site/docs/current/reference/html/jc.html
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        //http.csrf().disable();
 
         http.formLogin()
                 .loginPage("/login")

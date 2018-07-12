@@ -64,6 +64,9 @@
                 <button formaction="/departments_forward" class="btn btn-primary">
                     &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </div>
