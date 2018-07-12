@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.config;
 
+import com.vakhnenko.departments.resolver.LoggingHandlerExceptionResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,5 +42,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("/WEB-INF/properties/messages");
         return messageSource;
+    }
+
+    @Bean
+    public LoggingHandlerExceptionResolver loggingHandlerExceptionResolver() {
+        return new LoggingHandlerExceptionResolver();
     }
 }

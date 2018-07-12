@@ -15,6 +15,7 @@ public class FormEncodingSetterFilter extends BaseFilter {
     private static final String ENCODING_INIT_PARAM_NAME = "encoding";
     private String encoding;
 
+    @Override
     public void doFilter(HttpServletRequest req, HttpServletResponse resp,
                          FilterChain chain) throws ServletException, IOException {
         String contentType = req.getContentType();
@@ -23,6 +24,7 @@ public class FormEncodingSetterFilter extends BaseFilter {
         chain.doFilter(req, resp);
     }
 
+    @Override
     public void init(FilterConfig config) throws ServletException {
         encoding = config.getInitParameter(ENCODING_INIT_PARAM_NAME);
         if (encoding == null) {

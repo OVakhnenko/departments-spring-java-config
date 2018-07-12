@@ -1,47 +1,21 @@
 package com.vakhnenko.departments.controller;
 
-//@ControllerAdvice
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+
+@ControllerAdvice
 public class DepartmentsControllerAdvice {
-    /*
     private static final Logger logger = LoggerFactory.getLogger(DepartmentsControllerAdvice.class);
 
-    @ExceptionHandler
+    @ExceptionHandler(Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 
-        logger.error("8687650044: HTTP Error!!", e);
-
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName("500");
-        return mav;
+        logger.error("8687650044: Error!!", e);
+        throw e;
     }
-
-    @ExceptionHandler
-    //@ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleException400(Exception exception, Model model) {
-        model.addAttribute("exception", exception);
-        return "400";
-    }
-
-    //@ResponseStatus(HttpStatus.FORBIDDEN)
-    //@ExceptionHandler(AccessDeniedException.class)
-    public String handleException403(Exception exception, Model model) {
-        model.addAttribute("exception", exception);
-        return "403";
-    }
-
-    //@ResponseStatus(HttpStatus.NOT_FOUND)
-    //@ExceptionHandler(NoHandlerFoundException.class)
-    public String handleException404(Exception exception, Model model) {
-        model.addAttribute("exception", exception);
-        return "404";
-    }
-
-    //@ExceptionHandler
-    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException500(Exception exception, Model model) {
-        model.addAttribute("exception", exception);
-        return "500";
-    }*/
 }

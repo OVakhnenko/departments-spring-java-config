@@ -21,10 +21,10 @@ public class AppInit implements WebApplicationInitializer {
         // <!-- Encoding! MUST BE FIRST!! -->
         // <!-- http://www.skipy.ru/technics/encodings_webapp.html -->//
         FormEncodingSetterFilter formEncodingSetterFilter = new FormEncodingSetterFilter();
-        FilterRegistration.Dynamic filter = servletContext.
+        FilterRegistration.Dynamic encodingFilter = servletContext.
                 addFilter("FormEncodingSetterFilter", formEncodingSetterFilter);
-        filter.setInitParameter("encoding", "UTF-8");
-        filter.addMappingForUrlPatterns(null, true, "/*");
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
 
         // Spring Security filter
         servletContext.addFilter("springSecurityFilterChain",
