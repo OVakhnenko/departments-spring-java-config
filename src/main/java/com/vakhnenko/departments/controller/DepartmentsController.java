@@ -3,7 +3,6 @@ package com.vakhnenko.departments.controller;
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
 import com.vakhnenko.departments.entity.User;
-import com.vakhnenko.departments.entity.Variable;
 import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
 import com.vakhnenko.departments.service.SecurityService;
@@ -388,7 +387,6 @@ public class DepartmentsController {
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
-            Variable.guestLogged = false;
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/departments";
@@ -396,7 +394,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/guest", method = RequestMethod.GET)
     public String guest(Model model) {
-        Variable.guestLogged = true;
+        securityService.guestLogin();
         return "redirect:/departments";
     }
 

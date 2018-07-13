@@ -44,9 +44,13 @@ INSERT INTO users
 VALUES (1, 'admin', '$2a$10$SRikmt23vmocG0fn3lDLY.vxUdred2NMl5OpU1A89k6.2q2Oec8w.'); -- bcrypt admin 10 rounds
 INSERT INTO users
 VALUES (2, 'user', '$2a$10$KiT/FGjwueFIhSTNnUvGOePa.JucZA5vvT8zRCVtLqZ0sL7sae/DK'); -- bcrypt user 10 rounds
+-- INSERT INTO users
+-- VALUES (3, 'guest', '$2a$10$SIJNKIw3dWpuFMNGd/n6HO70tFoM.CoC044bNnvx5VNcLRHwn3DMK'); -- bcrypt user 10 rounds
 
 INSERT INTO roles VALUES (1, 'ROLE_USER'); -- ROLE_USER in class Constants
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN'); -- ROLE_ADMIN in class Constants
+-- INSERT INTO roles VALUES (3, 'ROLE_GUEST'); -- ROLE_GUEST in class Constants
 
 INSERT INTO user_roles VALUES (1, 2); -- user ADMIN has role ADMIN :)
 INSERT INTO user_roles VALUES (2, 1); -- user USER has role USER :)
+-- INSERT INTO user_roles VALUES (3, 3); -- user GUEST has role GUEST

@@ -1,8 +1,5 @@
 package com.vakhnenko.departments.filters;
 
-import com.vakhnenko.departments.entity.Variable;
-import com.vakhnenko.departments.security.UserAuthetication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
@@ -15,10 +12,7 @@ import java.io.IOException;
 public class GuestAuthenticationFilter extends BaseFilter {
     @Override
     public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        if (Variable.guestLogged) {
-            UserAuthetication guest = new UserAuthetication("guest");
-            SecurityContextHolder.getContext().setAuthentication(guest);
-        }
+        // @link SecurityServiceImpl.guestLogin
         chain.doFilter(req, resp);
     }
 }

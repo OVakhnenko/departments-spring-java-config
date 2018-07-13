@@ -2,7 +2,6 @@ package com.vakhnenko.departments.service;
 
 import com.vakhnenko.departments.dao.RoleDao;
 import com.vakhnenko.departments.dao.UserDao;
-import com.vakhnenko.departments.entity.Constants;
 import com.vakhnenko.departments.entity.Role;
 import com.vakhnenko.departments.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.vakhnenko.departments.entity.Constants.ROLE_USER;
+import static com.vakhnenko.departments.entity.Constants.ROLE_USER_NAME;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,8 +37,8 @@ public class UserServiceImpl implements UserService {
         users.add(user);
 
         Role role = new Role();
-        role.setId(Constants.ROLE_USER);
-        role.setName("ROLE_USER");
+        role.setId(ROLE_USER);
+        role.setName(ROLE_USER_NAME);
         role.setUsers(users);
 
         Set<Role> roles = new HashSet<>();
