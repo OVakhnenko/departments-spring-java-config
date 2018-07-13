@@ -1,6 +1,7 @@
 package com.vakhnenko.departments.entity;
 
 public class Constants {
+    public static final long ROLE_GUEST = 0L;
     public static final long ROLE_USER = 1L;
     public static final long ROLE_ADMIN = 2L;
 

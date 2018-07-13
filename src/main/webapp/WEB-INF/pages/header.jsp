@@ -19,11 +19,14 @@
             <button formaction="/registration" class="btn btn btn-info" style="float: right">
                 <span class="glyphicon glyphicon-leaf"></span>
                 &nbsp;Registration&nbsp;</button>
+            <button formaction="/guest" class="btn btn btn-info" style="float: right">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-home"></span>
+                &nbsp;Guest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
             <button formaction="/login" style="float: right" type="submit" class="btn btn-info">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="glyphicon glyphicon-ok"></span>
-                &nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </button>
+                &nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </c:if>
         <c:if test="${loggedIn}">
             <sec:authentication var="username" property="principal.username"/>
