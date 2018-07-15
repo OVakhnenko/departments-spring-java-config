@@ -1,8 +1,8 @@
 package com.vakhnenko.departments.validator;
 
-import com.vakhnenko.departments.entity.Constants;
 import com.vakhnenko.departments.entity.User;
 import com.vakhnenko.departments.service.UserService;
+import com.vakhnenko.departments.utils.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -27,11 +27,20 @@ public class PasswordValidator implements Validator {
         User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
-        if (user.getPassword().length() < Constants.MIN_LENGTH_PASSWORD || user.getPassword().length() > Constants.MAX_LENGTH_PASSWORD) {
+
+        String password = user.getPassword();
+
+        /*
+        if (password.length() < Constants.MIN_LENGTH_PASSWORD || password.length() > Constants.MAX_LENGTH_PASSWORD) {
             errors.rejectValue("password", "Size.userForm.password");
         }
+        */
 
-        if (!user.getConfirmPassword().equals(user.getPassword())) {
+        if (!Strings.digitsAndCharactersOnly(password)) {
+            errors.rejectValue("password", "Contains.userForm.password");
+        }
+
+        if (!user.getConfirmPassword().equals(password)) {
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
     }
