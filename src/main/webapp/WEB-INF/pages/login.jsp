@@ -61,7 +61,7 @@
                 <button class="btn btn-primary" type="submit">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
-                <button formaction="/departments_forward" class="btn btn-primary">
+                <button formaction="/cancel/login" class="btn btn-primary">
                     &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
 

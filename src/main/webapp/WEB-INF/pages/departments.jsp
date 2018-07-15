@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,12 +16,12 @@
 
     <title>Departments</title>
 
-    <style type="text/css">
+    <!--style type="text/css">
         label {
             display: block;
             width: 100px;
         }
-    </style>
+    </style-->
 
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
@@ -65,14 +65,25 @@
                         <td>&lt;empty&gt;</td>
                     </tr>
                 </c:if>
+                <sec:authorize var="loggedIn" access="isAuthenticated()"/>
                 <c:if test="${!empty listDepartments}">
                     <c:forEach items="${listDepartments}" var="department">
                         <tr>
                             <td><a href="/department/${department.department_id}">${department.name}</a></td>
-                            <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
-                                    class="glyphicon glyphicon-edit"></span></a></td>
-                            <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
-                                    class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
+                            <c:choose>
+                                <c:when test="${not loggedIn}">
+                                    <td><span class="glyphicon glyphicon-edit"
+                                              style="color: gray"></span></td>
+                                    <td><span class="glyphicon glyphicon-remove-sign"
+                                              style="color: gray"></span></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
+                                            class="glyphicon glyphicon-edit"></span></a></td>
+                                    <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
+                                            class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </c:if>

@@ -261,9 +261,9 @@ public class DepartmentsController {
         return departments(model);
     }
 
-    @RequestMapping(value = "/departments_forward")
-    public String departments21(ModelMap model) {
-        return "forward:/departments";
+    @RequestMapping(value = "/cancel/login")
+    public String departments2() {
+        return "redirect:/departments";
     }
 
     @RequestMapping(value = "/public")
@@ -369,7 +369,11 @@ public class DepartmentsController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String login(HttpServletRequest request, Model model, String error, String logout) {
+        //String referer = request.getHeader("referer");
+        //referer = (referer.length() == 0) ? "/departments" : Strings.getRefererPath(referer);
+        //model.addAttribute("referer", referer);
+
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }

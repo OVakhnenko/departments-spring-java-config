@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +68,7 @@
                         <td>&lt;empty&gt;</td>
                     </tr>
                 </c:if>
+                <sec:authorize var="loggedIn" access="isAuthenticated()"/>
                 <c:if test="${!empty listEmployees}">
                     <c:forEach items="${listEmployees}" var="tmpEmployee">
                         <tr>
@@ -75,12 +77,22 @@
                             </td>
                             <td>${tmpEmployee.age}</td>
                             <td>${tmpEmployee.type}</td>
-                            <td>
-                                <a href="<c:url value='/edit/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
-                                        class="glyphicon glyphicon-edit"></span></a></td>
-                            <td>
-                                <a href="<c:url value='/remove/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
-                                        class="glyphicon glyphicon-remove-sign" style="color: red"></span></a></td>
+                            <c:choose>
+                                <c:when test="${not loggedIn}">
+                                    <td><span class="glyphicon glyphicon-edit" style="color: gray"></span></td>
+                                    <td><span class="glyphicon glyphicon-remove-sign" style="color: gray"></span></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>
+                                        <a href="<c:url value='/edit/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
+                                                class="glyphicon glyphicon-edit"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="<c:url value='/remove/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
+                                                class="glyphicon glyphicon-remove-sign" style="color: red"></span></a>
+                                    </td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </c:if>
