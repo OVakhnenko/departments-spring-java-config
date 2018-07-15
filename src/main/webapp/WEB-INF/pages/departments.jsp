@@ -19,7 +19,7 @@
     <meta property="og:type" content="Java Spring">
     <meta property="og:url" content="http://app2.departments.pp.ua">
     <meta property="og:description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
-    <meta property="og:image" content="/resources/png/spring.png">
+    <meta property="og:image" content="http://vakhnenko.com/java_spring.png">
 
     <title>Departments</title>
 
