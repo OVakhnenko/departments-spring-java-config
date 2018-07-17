@@ -52,25 +52,26 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
         return sessionFactory;
     }
 
-    @Bean
     @Autowired
-    public HibernateTransactionManager transactionManagerHibernate(
-            SessionFactory sessionFactory) {
-
+    @Bean(name = "transactionManagerHibernate")
+    public HibernateTransactionManager transactionManagerHibernate(SessionFactory sessionFactory) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
     }
 
-    Properties hibernateProperties() {
+    private Properties hibernateProperties() {
         return new Properties() {
             {
+                //setProperty("hibernate.connection.autocommit", "true");
                 setProperty("hibernate.hbm2ddl.auto", "update");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
                 setProperty("hibernate.globally_quoted_identifiers", "true");
                 setProperty("hibernate.show_sql", "true");
                 setProperty("hibernate.connection.characterEncoding", "utf8");
+                setProperty("hibernate.connection.CharSet", "utf8");
+                //setProperty("hibernate.cache.use_second_level_cache", "true);
             }
         };
     }

@@ -1,12 +1,9 @@
 package com.vakhnenko.departments.config;
 
-import com.vakhnenko.departments.filters.FormEncodingSetterFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -20,16 +17,20 @@ public class AppInit implements WebApplicationInitializer {
         // <!-- Filters -->
         // <!-- Encoding! MUST BE FIRST!! -->
         // <!-- http://www.skipy.ru/technics/encodings_webapp.html -->//
+        /*
         FormEncodingSetterFilter formEncodingSetterFilter = new FormEncodingSetterFilter();
+
         FilterRegistration.Dynamic encodingFilter = servletContext.
                 addFilter("FormEncodingSetterFilter", formEncodingSetterFilter);
         encodingFilter.setInitParameter("encoding", "UTF-8");
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        // false if it is supposed to be matched before any declared filter
+        encodingFilter.addMappingForUrlPatterns(null, false, "/*");*/
 
         // Spring Security filter
-        servletContext.addFilter("springSecurityFilterChain",
+        /*servletContext.addFilter("springSecurityFilterChain",
                 new DelegatingFilterProxy("springSecurityFilterChain")).
-                addMappingForUrlPatterns(null, false, "/*");
+                addMappingForUrlPatterns(null, false, "/*");*/
 
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 

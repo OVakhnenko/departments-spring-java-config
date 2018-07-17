@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.config;
 
+import com.vakhnenko.departments.filters.FormEncodingSetterFilter;
 import com.vakhnenko.departments.filters.GuestAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
 // https://docs.spring.io/spring-security/site/docs/current/reference/html/jc.html
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    FormEncodingSetterFilter formEncodingSetterFilter;
 
     @Autowired
     GuestAuthenticationFilter guestAuthenticationFilter;
@@ -62,7 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //http.csrf().disable();
 
-        http.addFilterBefore(guestAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        // http://qaru.site/questions/98705/characterencodingfilter-dont-work-together-with-spring-security-320
+        http.addFilterBefore(formEncodingSetterFilter, CsrfFilter.class);
+        http.addFilterBefore(guestAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // CsrfFilter is first!
 
         http.formLogin()
                 .loginPage("/login").permitAll()

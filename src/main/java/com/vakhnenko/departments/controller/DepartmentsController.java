@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.controller;
 
+import com.vakhnenko.departments.dao.DepartmentDao;
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
 import com.vakhnenko.departments.entity.User;
@@ -7,8 +8,11 @@ import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
 import com.vakhnenko.departments.service.SecurityService;
 import com.vakhnenko.departments.service.UserService;
+import com.vakhnenko.departments.utils.Https;
 import com.vakhnenko.departments.validator.PasswordValidator;
 import com.vakhnenko.departments.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +38,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class DepartmentsController {
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentDao.class);
     private static final Map<String, String> typeEmployee;
 
     static {
@@ -272,7 +278,7 @@ public class DepartmentsController {
     }
 
     @RequestMapping(value = "/authorized/user", method = RequestMethod.GET)
-    public String userPage(Model model) {
+    public String userPage(HttpServletRequest request, HttpServletResponse response, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         ///User securityUser = (User) auth;
@@ -281,6 +287,9 @@ public class DepartmentsController {
         User user = new User();
         user.setUsername(userName);
         model.addAttribute("loggedUser", user);
+        model.addAttribute("sessionParams", Https.getSessionInfo(request, response));
+        model.addAttribute("cookiesParams", Https.getCookiesInfo(request, response));
+
         if ("user".equals(userName) || "admin".equals(userName)) {
             model.addAttribute("noChangeMessage", "You can't change the password for admin & user!");
         }
@@ -410,7 +419,8 @@ public class DepartmentsController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult,
+                               Model model, HttpServletRequest request, HttpServletResponse response) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {

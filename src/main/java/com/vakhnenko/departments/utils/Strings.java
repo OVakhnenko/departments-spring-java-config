@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.utils;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,5 +28,10 @@ public class Strings {
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
+    }
+
+    public static String timeDateStering() {
+        String result = " " + new Date().toString();
+        return result.replaceAll("\\s|\\:|\\+", "-");
     }
 }

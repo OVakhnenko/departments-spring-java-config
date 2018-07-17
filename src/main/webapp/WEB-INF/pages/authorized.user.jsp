@@ -1,3 +1,4 @@
+<%@ page import="com.vakhnenko.departments.entity.Variables" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -10,17 +11,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
+    <meta name="author" content="http://vakhnenko.com">
+
+    <meta property="og:title" content="Departments">
+    <meta property="og:site_name" content="Departments">
+    <meta property="og:url" content="http://app2.departments.pp.ua">
+    <meta property="og:description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
+    <meta property="og:image" content="http://vakhnenko.com/java.png">
 
     <title>Authorized user page</title>
-
-    <style type="text/css">
-        label {
-            display: block;
-            width: 180px;
-        }
-    </style>
 
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
@@ -52,6 +52,28 @@
             <div class="panel-body">
                 <div class="alert alert-success" role="alert">This is the page for the authorized user.
                     You can change the password:
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        Session:<br>
+                        id: ${sessionParams["session_id"]}<br>
+                        new: ${sessionParams["session_is_new"]}<br>
+                        creation date: ${sessionParams["session_creation_date"]}<br>
+                        last access date: ${sessionParams["session_last_access_date"]}<br>
+                        counter: ${sessionParams["counter_session"]}<br>
+                        <br>
+                        Cookies:<br>
+                        <c:set var="cookiesUsername" value="<%=Variables.cookiesUsername%>"/>
+                        username cookie: ${cookiesUsername}<br>
+                        usrname value: ${cookiesParams[cookiesUsername]}<br>
+                        <c:set var="cookiesParrword" value="<%=Variables.cookiesParrword%>"/>
+                        password cookie: ${cookiesParrword}<br>
+                        password value: ${cookiesParams[cookiesParrword]}<br>
+                        <c:set var="cookiesCounter" value="<%=Variables.cookiesCounter%>"/>
+                        counter cookie: ${cookiesCounter}<br>
+                        counter value: ${cookiesParams[cookiesCounter]}<br>
+                    </div>
                 </div>
 
                 <c:choose>

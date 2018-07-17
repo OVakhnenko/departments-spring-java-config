@@ -22,13 +22,6 @@
 
     <title>Departments</title>
 
-    <style type="text/css">
-        label {
-            display: block;
-            width: 100px;
-        }
-    </style>
-
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <link href="${bootstrap}" rel="stylesheet"/>

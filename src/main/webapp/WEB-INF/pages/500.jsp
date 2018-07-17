@@ -9,17 +9,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
+    <meta name="author" content="http://vakhnenko.com">
+
+    <meta property="og:title" content="Departments">
+    <meta property="og:site_name" content="Departments">
+    <meta property="og:url" content="http://app2.departments.pp.ua">
+    <meta property="og:description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
+    <meta property="og:image" content="http://vakhnenko.com/java.png">
 
     <title>500</title>
-
-    <style type="text/css">
-        label {
-            display: block;
-            width: 180px;
-        }
-    </style>
 
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
