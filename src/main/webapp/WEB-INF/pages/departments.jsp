@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Java EE, Spring (MVC, Security, JPA), Hibernate">
-    <meta name="author" content="http://vakhnenko.com">
+    <meta name="author" content="gmail@vakhnenko.com">
 
     <meta property="og:title" content="Departments">
     <meta property="og:site_name" content="Departments">
