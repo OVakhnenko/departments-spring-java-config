@@ -1,6 +1,5 @@
 package com.vakhnenko.departments.filters;
 
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Order(9)
+//@Order(9)
 @Component(value = "guestAuthenticationFilter")
 public class GuestAuthenticationFilter extends BaseFilter {
     @Override

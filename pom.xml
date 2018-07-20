@@ -6,14 +6,13 @@
     <groupId>com.vakhnenko</groupId>
     <artifactId>departments</artifactId>
     <packaging>war</packaging>
-    <version>2.0-SNAPSHOT</version>
-    <name>departments Maven Webapp</name>
+    <version>3.0-SNAPSHOT</version>
+    <name>departments spring mvc security jpa aop</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <junit.version>4.12</junit.version>
         <spring.version>4.3.18.RELEASE</spring.version>
-        <spring.mvc>4.3.18.RELEASE</spring.mvc>
         <spring.test>4.3.18.RELEASE</spring.test>
         <spring.security>4.2.7.RELEASE</spring.security>
         <aspectj.version>1.9.0</aspectj.version>
@@ -39,7 +38,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${spring.mvc}</version>
+            <version>${spring.version}</version>
             <!-- exclude commons-logging -->
             <exclusions>
                 <exclusion>
@@ -51,22 +50,17 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${spring.mvc}</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring.mvc}</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.mvc}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <version>${spring.test}</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -82,23 +76,8 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
 
@@ -189,11 +168,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.9</version>
         </dependency>
     </dependencies>
 
