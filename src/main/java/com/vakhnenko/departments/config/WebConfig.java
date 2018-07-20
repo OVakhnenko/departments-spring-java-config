@@ -47,6 +47,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
+    /*@
+    Bean
+    public static PropertyPlaceholderConfigurer ppc() throws IOException {
+        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+        ppc.setLocations(new ClassPathResource("/WEB-INF/properties/application.properties"));
+        ppc.setIgnoreUnresolvablePlaceholders(true);
+        return ppc;
+    }*/
+
     @Bean
     public LoggingHandlerExceptionResolver loggingHandlerExceptionResolver() {
         return new LoggingHandlerExceptionResolver();

@@ -1,5 +1,6 @@
 package com.vakhnenko.departments.aop;
 
+import com.vakhnenko.departments.condition.AopDebugCondition;
 import com.vakhnenko.departments.utils.Strings;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -7,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Conditional;
 
 import java.lang.reflect.Method;
 
@@ -14,6 +16,7 @@ import java.lang.reflect.Method;
 public class AopLogger {
     final static Logger logger = LoggerFactory.getLogger(AopLogger.class);
 
+    @Conditional(AopDebugCondition.class)
     @Around("execution(* com.vakhnenko.departments.service.*.*(..))")
     public Object joinpointDepartmentService(ProceedingJoinPoint pjp) throws Throwable {
         long start = System.nanoTime();

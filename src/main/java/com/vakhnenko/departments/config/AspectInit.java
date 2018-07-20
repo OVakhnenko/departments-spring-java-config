@@ -1,16 +1,15 @@
 package com.vakhnenko.departments.config;
 
 import com.vakhnenko.departments.aop.AopLogger;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import com.vakhnenko.departments.condition.AopDebugCondition;
+import org.springframework.context.annotation.*;
 
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan("com.vakhnenko.departments")
 public class AspectInit {
     @Bean
+    @Conditional(AopDebugCondition.class)
     public AopLogger aopLogger() {
         return new AopLogger();
     }
