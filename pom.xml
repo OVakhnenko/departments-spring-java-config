@@ -12,9 +12,11 @@
 
     <properties>
         <junit.version>4.12</junit.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
         <spring.mvc>4.3.18.RELEASE</spring.mvc>
         <spring.test>4.3.18.RELEASE</spring.test>
         <spring.security>4.2.7.RELEASE</spring.security>
+        <aspectj.version>1.9.0</aspectj.version>
         <spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
         <jstl.version>1.2</jstl.version>
         <Serlets.version>3.1.0</Serlets.version>
@@ -61,11 +63,44 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.mvc}</version>
         </dependency>
+        <!--dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.test}</version>
+            <scope>test</scope>
+        </dependency-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.test}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- AOP -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
 
         <!-- Spring Security 4 dependencies -->
@@ -155,6 +190,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.9</version>
         </dependency>
     </dependencies>
 

@@ -34,4 +34,10 @@ public class Strings {
         String result = " " + new Date().toString();
         return result.replaceAll("\\s|\\:|\\+", "-");
     }
+
+    public static String nanoToSeconds(long nano) {
+        long sec = nano / 1_000_000_000;
+        long mod = nano % 1_000_000_000;
+        return "" + sec + "," + mod / 1_000;
+    }
 }
