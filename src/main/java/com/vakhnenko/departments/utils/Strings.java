@@ -14,7 +14,7 @@ public class Strings {
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])." +
             "{" + MIN_LENGTH_PASSWORD + "," + MAX_LENGTH_PASSWORD + "})";
 
-    public Strings() {
+    private Strings() {
     }
 
     public static String getRefererPath(String path) {

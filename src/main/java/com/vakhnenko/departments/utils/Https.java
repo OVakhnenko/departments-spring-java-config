@@ -17,6 +17,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.vakhnenko.departments.utils.Strings.timeDateStering;
 
 public class Https {
+
+    private Https() {
+    }
+
     public static Map<String, String> getSessionInfo(HttpServletRequest request, HttpServletResponse response) {
         Map<String, String> resultMap = new HashMap();
 
