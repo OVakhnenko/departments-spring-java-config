@@ -5,6 +5,7 @@ import com.vakhnenko.departments.config.RootConfig;
 import com.vakhnenko.departments.config.WebConfig;
 import com.vakhnenko.departments.config.WebInit;
 import com.vakhnenko.departments.service.DepartmentService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,13 @@ import static org.hamcrest.Matchers.isA;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppInit.class, RootConfig.class, WebConfig.class, WebInit.class})
-public class AutowiredTest {
+public class AutowiredTests {
 
     @Autowired
     @Qualifier("departmentService")
     DepartmentService departmentService;
 
+    @Ignore
     @Test
     public void test_ml_always_return_true() {
         assertThat(departmentService, instanceOf(DepartmentService.class));

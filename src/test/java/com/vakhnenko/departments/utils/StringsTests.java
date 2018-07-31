@@ -5,7 +5,7 @@ import org.junit.Test;
 import static com.vakhnenko.departments.utils.Strings.digitsAndCharactersOnly;
 import static com.vakhnenko.departments.utils.Strings.getRefererPath;
 
-public class StringsTest {
+public class StringsTests {
     @Test
     public void get_referer_path() {
         String result = getRefererPath("http://google.com/test");

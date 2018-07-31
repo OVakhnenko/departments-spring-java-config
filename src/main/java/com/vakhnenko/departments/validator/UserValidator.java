@@ -1,6 +1,5 @@
 package com.vakhnenko.departments.validator;
 
-import com.vakhnenko.departments.entity.Constants;
 import com.vakhnenko.departments.entity.User;
 import com.vakhnenko.departments.service.UserService;
 import com.vakhnenko.departments.utils.Strings;
@@ -10,6 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import static com.vakhnenko.departments.entity.Constants.MAX_LENGTH_USERNAME;
+import static com.vakhnenko.departments.entity.Constants.MIN_LENGTH_USERNAME;
 
 @Component
 @PropertySource("/WEB-INF/properties/messages.properties")
@@ -28,7 +30,7 @@ public class UserValidator implements Validator {
         User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
-        if (user.getUsername().length() < Constants.MIN_LENGTH_USERNAME || user.getUsername().length() > Constants.MAX_LENGTH_USERNAME) {
+        if (user.getUsername().length() < MIN_LENGTH_USERNAME || user.getUsername().length() > MAX_LENGTH_USERNAME) {
             errors.rejectValue("username", "Size.userForm.username");
         }
 
@@ -41,7 +43,7 @@ public class UserValidator implements Validator {
         String password = user.getPassword();
 
         /**
-         if (password.length() < Constants.MIN_LENGTH_PASSWORD || password.length() > Constants.MAX_LENGTH_PASSWORD) {
+         if (password.length() < MIN_LENGTH_PASSWORD || password.length() > MAX_LENGTH_PASSWORD) {
          errors.rejectValue("password", "Size.userForm.password");
          }*/
 

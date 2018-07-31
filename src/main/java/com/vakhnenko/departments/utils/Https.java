@@ -1,6 +1,5 @@
 package com.vakhnenko.departments.utils;
 
-import com.vakhnenko.departments.entity.Variables;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -14,6 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.vakhnenko.departments.entity.Variables.*;
 import static com.vakhnenko.departments.utils.Strings.timeDateStering;
 
 public class Https {
@@ -44,14 +44,14 @@ public class Https {
     }
 
     private static void ifCookiesIdsEmptyFillIt() {
-        if (Variables.cookiesUsername.isEmpty()) {
-            Variables.cookiesUsername = UUID.randomUUID().toString() + timeDateStering();
+        if (cookiesUsername.isEmpty()) {
+            cookiesUsername = UUID.randomUUID().toString() + timeDateStering();
         }
-        if (Variables.cookiesParrword.isEmpty()) {
-            Variables.cookiesParrword = UUID.randomUUID().toString() + timeDateStering();
+        if (cookiesParrword.isEmpty()) {
+            cookiesParrword = UUID.randomUUID().toString() + timeDateStering();
         }
-        if (Variables.cookiesCounter.isEmpty()) {
-            Variables.cookiesCounter = UUID.randomUUID().toString() + timeDateStering();
+        if (cookiesCounter.isEmpty()) {
+            cookiesCounter = UUID.randomUUID().toString() + timeDateStering();
         }
     }
 
@@ -67,17 +67,17 @@ public class Https {
         Cookie[] cookies = request.getCookies();
 
         for (Cookie cookie : cookies) {
-            if (Variables.cookiesUsername.equals(cookie.getName())) {
+            if (cookiesUsername.equals(cookie.getName())) {
                 finded++;
                 findedUsername = true;
-                resultMap.put(Variables.cookiesUsername, cookie.getValue().toString());
+                resultMap.put(cookiesUsername, cookie.getValue().toString());
             }
-            if (Variables.cookiesParrword.equals(cookie.getName())) {
+            if (cookiesParrword.equals(cookie.getName())) {
                 finded++;
                 findedPassword = true;
-                resultMap.put(Variables.cookiesParrword, cookie.getValue().toString());
+                resultMap.put(cookiesParrword, cookie.getValue().toString());
             }
-            if (Variables.cookiesCounter.equals(cookie.getName())) {
+            if (cookiesCounter.equals(cookie.getName())) {
                 finded++;
                 findedCounter = true;
                 int count;
@@ -88,7 +88,7 @@ public class Https {
                 }
                 cookie.setValue("" + count);
                 response.addCookie(cookie);
-                resultMap.put(Variables.cookiesCounter, "" + count);
+                resultMap.put(cookiesCounter, "" + count);
             }
 
             if (finded == 3) {
@@ -98,18 +98,18 @@ public class Https {
 
         if (!findedUsername) {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            response.addCookie(new Cookie(Variables.cookiesUsername, username));
-            resultMap.put(Variables.cookiesUsername, username);
+            response.addCookie(new Cookie(cookiesUsername, username));
+            resultMap.put(cookiesUsername, username);
         }
         if (!findedPassword) {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             String password = BCrypt.hashpw(username, BCrypt.gensalt(12));
-            response.addCookie(new Cookie(Variables.cookiesParrword, password));
-            resultMap.put(Variables.cookiesParrword, password);
+            response.addCookie(new Cookie(cookiesParrword, password));
+            resultMap.put(cookiesParrword, password);
         }
         if (!findedCounter) {
-            response.addCookie(new Cookie(Variables.cookiesCounter, "1"));
-            resultMap.put(Variables.cookiesCounter, "1");
+            response.addCookie(new Cookie(cookiesCounter, "1"));
+            resultMap.put(cookiesCounter, "1");
         }
 
         return resultMap;
